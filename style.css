@@ -3,39 +3,39 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Courier New', Courier, monospace;
 }
 
 /* Default Link Styling */
 a {
     text-decoration: none;
-    color: #007bff; /* Default blue color */
+    color: #00ff00; /* Bright green */
 }
 
 a:hover {
-    color: #0056b3; /* Darker blue on hover */
+    color: #33ff33; /* Slightly lighter green */
 }
 
 a:visited {
-    color: #007bff; /* Prevent purple color after clicking */
+    color: #00ff00;
 }
 
 /* Body */
 body {
-    background-color: #f4f4f4;
-    color: #333;
+    background-color: #000; /* Terminal black */
+    color: #00ff00;
     line-height: 1.6;
 }
 
 /* Header Styling */
 header {
-    background-color: #333;
-    color: white;
+    background-color: #111;
+    color: #00ff00;
     padding: 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    position: relative;
+    border-bottom: 2px solid #0f0;
 }
 
 header .logo h1 {
@@ -53,25 +53,19 @@ nav {
     gap: 20px;
 }
 
-.nav-list li {
-    display: inline-block;
-}
-
 .nav-list li a {
-    color: white;
-    text-decoration: none;
-    font-size: 1.2rem;
+    color: #00ff00;
     padding: 10px 15px;
-    border-radius: 5px;
-    transition: background 0.3s ease;
+    border: 1px solid #00ff00;
+    transition: background 0.3s ease, color 0.3s ease;
 }
 
 .nav-list li a:hover {
-    background: #f39c12;
-    color: white;
+    background: #00ff00;
+    color: #000;
 }
 
-/* Hamburger Menu (Hidden on Desktop) */
+/* Hamburger Menu */
 .hamburger {
     display: none;
     flex-direction: column;
@@ -82,8 +76,7 @@ nav {
 .hamburger .line {
     width: 25px;
     height: 3px;
-    background-color: white;
-    transition: transform 0.3s ease;
+    background-color: #0f0;
 }
 
 /* Responsive Navigation */
@@ -92,15 +85,11 @@ nav {
     position: absolute;
     top: 70px;
     left: 0;
-    background-color: #333;
+    background-color: #111;
     width: 100%;
     text-align: center;
     padding: 20px;
-    border-radius: 8px;
-}
-
-.nav-list.active li {
-    margin-bottom: 15px;
+    border: 1px solid #0f0;
 }
 
 /* Hero Section */
@@ -108,9 +97,10 @@ nav {
     display: flex;
     justify-content: center;
     align-items: center;
-    color: #000;
+    color: #0f0;
     text-align: center;
     flex-direction: column;
+    padding: 40px 20px;
 }
 
 .hero h2 {
@@ -124,8 +114,9 @@ nav {
 /* Virus Section */
 .virus-section {
     padding: 40px 20px;
-    background-color: white;
+    background-color: #000;
     text-align: center;
+    border-top: 1px solid #0f0;
 }
 
 .virus-section h2 {
@@ -133,53 +124,49 @@ nav {
     margin-bottom: 30px;
 }
 
+/* Cards */
 .virus {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 20px;
     max-width: 1200px;
     margin: 0 auto;
-    align-items: stretch;
 }
 
-/* Fix for misaligned buttons */
 .virus-item, .attack-card {
+    background-color: #111;
+    color: #00ff00;
+    border: 1px solid #0f0;
     width: 300px;
     height: 200px;
+    padding: 20px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
     text-align: center;
-    background-color: #e4e4e4;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease, filter 0.3s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Ensure text inside buttons doesn't affect alignment */
+.virus-item:hover, .attack-card:hover {
+    transform: scale(1.03);
+    box-shadow: 0 0 10px #00ff00;
+}
+
+/* Text Container */
 .virus-item p, .attack-card p {
     flex-grow: 1;
     display: flex;
     align-items: center;
     justify-content: center;
-    text-align: center;
-    min-height: 50px;
-}
-
-/* Hover Effect */
-.virus-item:hover, .attack-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
-    filter: invert(1);
 }
 
 /* Featured Cyber Attacks Section */
 .attacks-section {
     padding: 40px 20px;
-    background-color: #f9f9f9;
+    background-color: #000;
     text-align: center;
+    border-top: 1px solid #0f0;
 }
 
 .attacks-section h2 {
@@ -193,11 +180,12 @@ nav {
     margin: 10px;
 }
 
-/* Cybersecurity Tips Section */
+/* Tips Section */
 .tips-section {
-    background-color: white;
+    background-color: #000;
     padding: 40px 20px;
     text-align: center;
+    border-top: 1px solid #0f0;
 }
 
 .tips-section h2 {
@@ -212,15 +200,16 @@ nav {
 .tips-section li {
     font-size: 1.2rem;
     margin-bottom: 10px;
-    color: #555;
+    color: #00ff00;
 }
 
 /* Footer */
 footer {
-    background-color: #333;
-    color: white;
+    background-color: #111;
+    color: #00ff00;
     padding: 20px;
     text-align: center;
+    border-top: 2px solid #0f0;
 }
 
 footer .social-media {
@@ -229,7 +218,7 @@ footer .social-media {
 
 footer .social-media a {
     margin: 0 10px;
-    color: white;
+    color: #00ff00;
     font-size: 1.2rem;
 }
 
@@ -246,12 +235,11 @@ footer .social-media a {
         flex-direction: column;
         position: absolute;
         width: 100%;
-        background-color: #333;
+        background-color: #111;
         top: 70px;
         left: 0;
         padding: 20px;
         text-align: center;
-        border-radius: 8px;
     }
 
     .nav-list.active {
@@ -260,10 +248,6 @@ footer .social-media a {
 
     .hamburger {
         display: flex;
-    }
-
-    .virus, .attack-card {
-        flex-direction: column;
     }
 
     .virus-item, .attack-card {
