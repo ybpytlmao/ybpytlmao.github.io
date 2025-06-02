@@ -1,0 +1,272 @@
+/* Global Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+
+/* Default Link Styling */
+a {
+    text-decoration: none;
+    color: #007bff; /* Default blue color */
+}
+
+a:hover {
+    color: #0056b3; /* Darker blue on hover */
+}
+
+a:visited {
+    color: #007bff; /* Prevent purple color after clicking */
+}
+
+/* Body */
+body {
+    background-color: #f4f4f4;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* Header Styling */
+header {
+    background-color: #333;
+    color: white;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+}
+
+header .logo h1 {
+    font-size: 2rem;
+}
+
+nav {
+    display: flex;
+    align-items: center;
+}
+
+.nav-list {
+    list-style-type: none;
+    display: flex;
+    gap: 20px;
+}
+
+.nav-list li {
+    display: inline-block;
+}
+
+.nav-list li a {
+    color: white;
+    text-decoration: none;
+    font-size: 1.2rem;
+    padding: 10px 15px;
+    border-radius: 5px;
+    transition: background 0.3s ease;
+}
+
+.nav-list li a:hover {
+    background: #f39c12;
+    color: white;
+}
+
+/* Hamburger Menu (Hidden on Desktop) */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+}
+
+.hamburger .line {
+    width: 25px;
+    height: 3px;
+    background-color: white;
+    transition: transform 0.3s ease;
+}
+
+/* Responsive Navigation */
+.nav-list.active {
+    display: block;
+    position: absolute;
+    top: 70px;
+    left: 0;
+    background-color: #333;
+    width: 100%;
+    text-align: center;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.nav-list.active li {
+    margin-bottom: 15px;
+}
+
+/* Hero Section */
+.hero {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #000;
+    text-align: center;
+    flex-direction: column;
+}
+
+.hero h2 {
+    font-size: 2.5rem;
+}
+
+.hero p {
+    font-size: 1.2rem;
+}
+
+/* Virus Section */
+.virus-section {
+    padding: 40px 20px;
+    background-color: white;
+    text-align: center;
+}
+
+.virus-section h2 {
+    font-size: 2.5rem;
+    margin-bottom: 30px;
+}
+
+.virus {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    align-items: stretch;
+}
+
+/* Fix for misaligned buttons */
+.virus-item, .attack-card {
+    width: 300px;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    background-color: #e4e4e4;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, filter 0.3s ease;
+}
+
+/* Ensure text inside buttons doesn't affect alignment */
+.virus-item p, .attack-card p {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    min-height: 50px;
+}
+
+/* Hover Effect */
+.virus-item:hover, .attack-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    filter: invert(1);
+}
+
+/* Featured Cyber Attacks Section */
+.attacks-section {
+    padding: 40px 20px;
+    background-color: #f9f9f9;
+    text-align: center;
+}
+
+.attacks-section h2 {
+    font-size: 2.5rem;
+    margin-bottom: 30px;
+}
+
+.attack-card-link {
+    text-decoration: none;
+    display: inline-block;
+    margin: 10px;
+}
+
+/* Cybersecurity Tips Section */
+.tips-section {
+    background-color: white;
+    padding: 40px 20px;
+    text-align: center;
+}
+
+.tips-section h2 {
+    font-size: 2.5rem;
+    margin-bottom: 30px;
+}
+
+.tips-section ul {
+    list-style-type: none;
+}
+
+.tips-section li {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    color: #555;
+}
+
+/* Footer */
+footer {
+    background-color: #333;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+footer .social-media {
+    margin-top: 10px;
+}
+
+footer .social-media a {
+    margin: 0 10px;
+    color: white;
+    font-size: 1.2rem;
+}
+
+/* Make Buttons Inline */
+.virus-item-link, .attack-card-link {
+    display: inline-block;
+    margin: 10px;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .nav-list {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        width: 100%;
+        background-color: #333;
+        top: 70px;
+        left: 0;
+        padding: 20px;
+        text-align: center;
+        border-radius: 8px;
+    }
+
+    .nav-list.active {
+        display: flex;
+    }
+
+    .hamburger {
+        display: flex;
+    }
+
+    .virus, .attack-card {
+        flex-direction: column;
+    }
+
+    .virus-item, .attack-card {
+        width: 100%;
+    }
+}
