@@ -1,9 +1,7 @@
-/* ========= CONFIG ========= */
-const WM_API_KEY = "XiqsgYmgEV0TuiSIGrDJ58yKcczKPQhjgqagYOzK"; // <- put your key here
+const WM_API_KEY = "XiqsgYmgEV0TuiSIGrDJ58yKcczKPQhjgqagYOzK";
 const WM_BASE    = "https://api.watchmode.com/v1";
-const REGION     = "AU"; // change to your country code if you like (see /regions) 
+const REGION     = "AU"; 
 
-/* ========= DOM ========= */
 const form     = document.getElementById("searchForm");
 const input    = document.getElementById("queryInput");
 const grid     = document.getElementById("results");
@@ -16,7 +14,6 @@ const chips = {
 };
 const clearBtn = document.getElementById("clearBtn");
 
-/* Modal */
 const modal       = document.getElementById("detailsModal");
 const modalClose  = document.getElementById("modalClose");
 const modalPoster = document.getElementById("modalPoster");
@@ -24,11 +21,9 @@ const modalTitle  = document.getElementById("modalTitle");
 const modalMeta   = document.getElementById("modalMeta");
 const modalPlot   = document.getElementById("modalPlot");
 
-/* ========= STATE ========= */
 let currentType   = "all"; // "all" | "movie" | "show"
 let lastResults   = [];    // results from autocomplete (titles)
 
-/* ========= Helpers ========= */
 function setStatus(msg = "") { statusEl.textContent = msg; }
 function setChipActive(which) {
   currentType = which;
@@ -57,7 +52,6 @@ function filtered(results){
   return results;
 }
 
-/* Build one result tile */
 function tileMarkup(rec){
   const img   = rec.image_url || NO_IMG;
   const title = rec.name || "Untitled";
@@ -78,7 +72,6 @@ function tileMarkup(rec){
   `;
 }
 
-/* Render grid */
 function render(results){
   const list = filtered(results);
   if (!list.length){
@@ -92,44 +85,32 @@ function render(results){
   grid.innerHTML = list.map(tileMarkup).join("");
 }
 
-/* ========= API calls ========= */
-
-/* Fast search with poster thumbs:
-   /v1/autocomplete-search?search_value=...&search_type=2 (titles only) */
 async function wmAutocompleteTitles(query){
   const url = new URL(`${WM_BASE}/autocomplete-search/`);
   url.searchParams.set("apiKey", WM_API_KEY);
   url.searchParams.set("search_value", query);
-  url.searchParams.set("search_type", 2); // titles only
+  url.searchParams.set("search_type", 2);
   const res = await fetch(url.toString());
   if (!res.ok) throw new Error("Network error");
   const data = await res.json();
-  // Only keep title results (result_type === "title")
-  // The object already includes: name, type, id, year, image_url
   return (data.results || []).filter(r => r.result_type === "title");
 }
 
-/* Details + streaming sources:
-   /v1/title/{id}/details?append_to_response=sources&regions=NZ */
 async function wmTitleDetailsWithSources(id){
   const url = new URL(`${WM_BASE}/title/${id}/details/`);
   url.searchParams.set("apiKey", WM_API_KEY);
-  url.searchParams.set("append_to_response", "sources"); // include sources
-  url.searchParams.set("regions", REGION);               // filter to your country
+  url.searchParams.set("append_to_response", "sources"); 
+  url.searchParams.set("regions", REGION);               
   const res = await fetch(url.toString());
   if (!res.ok) throw new Error("Details not found");
   return await res.json();
 }
 
-/* ========= Modal rendering ========= */
-
 function platformBadges(sources){
   if (!Array.isArray(sources) || !sources.length) return "";
 
-  // Prefer subscription/free first; then buy/rent.
   const priority = { sub: 0, free: 1, buy: 2, rent: 3, other: 9 };
 
-  // Deduplicate by 'name' + 'type'
   const seen = new Set();
   const uniq = [];
   for (const s of sources){
@@ -139,7 +120,6 @@ function platformBadges(sources){
     uniq.push(s);
   }
 
-  // Sort by type priority, then by name
   uniq.sort((a, b) => {
     const pa = priority[a.type] ?? 9;
     const pb = priority[b.type] ?? 9;
@@ -147,7 +127,6 @@ function platformBadges(sources){
     return (a.name || "").localeCompare(b.name || "");
   });
 
-  // Limit to 10 to keep UI tidy
   const top = uniq.slice(0, 10);
 
   return `
@@ -175,10 +154,8 @@ function openModal(details){
   const genres  = Array.isArray(details.genre_names) ? details.genre_names.join(", ") : "";
   const poster  = details.poster || details.poster_url || details.backdrop || details.image_url || NO_IMG;
 
-  // Plot overview (text); Watchmode returns plot_overview
   const overview = details.plot_overview || "No synopsis available.";
 
-  // Streaming sources array when append_to_response=sources (+ regions filter)
   const sources = details.sources || [];
 
   modalPoster.src = poster;
@@ -186,10 +163,8 @@ function openModal(details){
   modalTitle.textContent = title;
   modalMeta.textContent  = `${year} • ${type}${genres ? " • " + genres : ""} • ${runtime} • ⭐ ${rating}`;
 
-  // Fill plot
   modalPlot.textContent  = overview;
 
-  // Insert/replace platforms section under the plot
   let platEl = modal.querySelector(".platforms");
   if (platEl) platEl.remove();
   modalPlot.insertAdjacentHTML("afterend", platformBadges(sources));
@@ -203,7 +178,6 @@ function closeModal(){
   modal.removeAttribute("open");
 }
 
-/* ========= Events ========= */
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
   const q = input.value.trim();
@@ -232,7 +206,6 @@ chips.all.addEventListener("click",  () => { setChipActive("all");   render(last
 chips.movie.addEventListener("click",() => { setChipActive("movie"); render(lastResults); });
 chips.show.addEventListener("click", () => { setChipActive("show");  render(lastResults); });
 
-/* Tile click → load details + sources */
 grid.addEventListener("click", async (e) => {
   const tile = e.target.closest(".tile");
   if (!tile) return;
@@ -247,7 +220,6 @@ grid.addEventListener("click", async (e) => {
   }
 });
 
-/* Keyboard open (Enter) */
 grid.addEventListener("keydown", async (e) => {
   if (e.key !== "Enter") return;
   const tile = e.target.closest(".tile");
@@ -263,7 +235,6 @@ grid.addEventListener("keydown", async (e) => {
   }
 });
 
-/* Modal close */
 modalClose?.addEventListener("click", closeModal);
 modal?.addEventListener("click", (e)=>{
   const body = modal.querySelector(".modal-body");
@@ -274,7 +245,7 @@ modal?.addEventListener("click", (e)=>{
 });
 window.addEventListener("keydown", (e)=> { if (e.key === "Escape") closeModal(); });
 
-/* ========= Init ========= */
 setChipActive("all");
 setStatus("Search for a movie or TV show…");
+
 
