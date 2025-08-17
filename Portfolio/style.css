@@ -1,0 +1,131 @@
+/* --- Base layout --- */
+body {
+    margin: 0;
+    color: rgb(255, 255, 255);
+    background-color: rgb(0, 0, 0);
+    display: flex;
+    justify-content: center;   /* center content horizontally */
+    align-items: flex-start;   /* stick to top */
+    min-height: 100vh;
+    font-family: sans-serif;
+}
+
+/* Keep your content above the canvas */
+#canv {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.container {
+    position: relative;
+    z-index: 1;
+    padding: 2rem 1rem;
+    max-width: 1200px;
+    width: 100%;
+}
+
+/* --- Headings --- */
+.container h1, .container h2 {
+    margin: 0;
+    font-weight: bold;
+    text-align: center;
+    color: rgb(255, 255, 255);
+    text-shadow: 0 0 10px #000000, 0 0 20px #000000, 0 0 30px #000000;
+    animation: pulse 2s infinite;
+}
+
+.container h1 {
+    font-size: 100px;
+}
+
+.container h2 {
+    font-size: 25px;
+}
+
+/* --- Examples grid (left→right, wraps) --- */
+.examples-section {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;    /* center the row(s) */
+    align-items: stretch;       /* equal heights if content differs */
+    gap: 20px;
+    padding: 10px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Each anchor is a card slot */
+.examples-item-link {
+    display: block;             /* anchors are inline by default */
+    flex: 0 0 300px;            /* fixed card width */
+    text-decoration: none;      /* remove underline for whole card */
+    color: inherit;             /* keep heading/text color */
+}
+
+/* Card styling */
+.examples-item {
+    width: 100%;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+    border-radius: 12px;
+    box-sizing: border-box;
+    box-shadow: 0 4px 16px rgb(0, 0, 0);
+    transition: transform 0.25s ease, box-shadow 0.25s ease, filter 0.25s ease;
+}
+
+.examples-item:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 24px rgb(255, 255, 255);
+    filter: brightness(1.05);
+}
+
+/* Card content */
+.examples-item h3{
+    margin: 0;
+    text-shadow: 0 0 6px #000000, 0 0 12px #000000;
+}
+
+.examples-item h3 {
+    font-weight: 700;
+    font-size: 1.25rem;
+}
+
+
+.examples-item img {
+    width: 100%;
+    height: 150px;       /* fixed height */
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 10px; /* space before title */
+}
+
+
+
+/* --- Glow animation --- */
+@keyframes pulse {
+    0%   { text-shadow: 0 0 10px #000000, 0 0 20px #000000, 0 0 30px #000000; }
+    50%  { text-shadow: 0 0 20px #000000, 0 0 30px #000000, 0 0 40px #000000; }
+    100% { text-shadow: 0 0 10px #000000, 0 0 20px #000000, 0 0 30px #000000; }
+}
+
+/* --- Responsive tweaks --- */
+@media (max-width: 900px) {
+    .container h1 { font-size: 64px; }
+    .container h2 { font-size: 28px; }
+    .examples-item-link { flex: 0 0 260px; }
+    .examples-item { height: 180px; }
+}
+
+@media (max-width: 520px) {
+    .container h1 { font-size: 42px; }
+    .container h2 { font-size: 22px; }
+    .examples-item-link { flex: 0 0 100%; } /* single column on very small screens */
+    .examples-item { height: auto; min-height: 160px; }
+}

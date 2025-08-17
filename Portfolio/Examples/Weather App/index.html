@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Weather</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <main class="wrap">
+    <section class="card">
+      <h1>Weather</h1>
+
+      <form id="searchForm" class="search" autocomplete="off" aria-label="Search city weather">
+        <input id="cityInput" type="text" placeholder="Search city..." aria-label="City name" />
+        <button type="submit" class="btn">Search</button>
+      </form>
+
+      <div class="actions">
+        <button id="geoBtn" class="btn btn-ghost" type="button">Use my location</button>
+        <div class="units" role="group" aria-label="Temperature units">
+          <button id="cBtn" class="chip chip-active" type="button">°C</button>
+          <button id="fBtn" class="chip" type="button">°F</button>
+        </div>
+      </div>
+
+      <div id="status" class="status" aria-live="polite"></div>
+
+      <article id="result" class="result" hidden>
+        <header class="result-head">
+          <div>
+            <h2 id="placeName"></h2>
+            <p id="updatedAt" class="muted"></p>
+          </div>
+          <div class="big-temp">
+            <span id="temp"></span>°<span id="unitLabel">C</span>
+          </div>
+        </header>
+
+        <div class="grid">
+          <div class="metric">
+            <div class="label">Feels like</div>
+            <div class="value"><span id="feels"></span>°</div>
+          </div>
+          <div class="metric">
+            <div class="label">Humidity</div>
+            <div class="value"><span id="humidity"></span>%</div>
+          </div>
+          <div class="metric">
+            <div class="label">Wind</div>
+            <div class="value"><span id="wind"></span></div>
+            <div class="muted">Dir: <span id="windDir"></span>°</div>
+          </div>
+          <div class="metric">
+            <div class="label">Precipitation</div>
+            <div class="value"><span id="precip"></span> mm</div>
+          </div>
+        </div>
+
+        <p id="desc" class="muted" style="text-align:center;margin-top:.5rem;"></p>
+      </article>
+    </section>
+
+    <footer class="foot">
+      <small>Data: Open-Meteo • Built by Luke (ybpyt)</small>
+    </footer>
+  </main>
+</body>
+</html>
