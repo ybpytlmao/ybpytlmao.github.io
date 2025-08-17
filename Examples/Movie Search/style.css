@@ -18,19 +18,12 @@
 *{box-sizing:border-box}
 html,body{height:100%}
 
-/* Default theme background (you can keep day/night toggle if you like) */
 body{
   margin:0;
   color:var(--ink);
   font-family: system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
   background: radial-gradient(1200px 800px at 50% -10%, #0b0c1a 0%, #050508 55%);
   transition: background 0.8s ease;
-}
-body.night{
-  background: radial-gradient(1200px 800px at 50% -10%, #0b0c1a 0%, #050508 55%);
-}
-body.day{
-  background: radial-gradient(1200px 800px at 50% -10%, #fce570 0%, #000000 55%);
 }
 
 .wrap{
@@ -215,3 +208,4 @@ h1{
 @media (max-width: 760px){
   .modal-body{ grid-template-columns: 1fr; }
 }
+
