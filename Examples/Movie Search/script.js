@@ -1,7 +1,7 @@
 /* ========= CONFIG ========= */
 const WM_API_KEY = "XiqsgYmgEV0TuiSIGrDJ58yKcczKPQhjgqagYOzK"; // <- put your key here
 const WM_BASE    = "https://api.watchmode.com/v1";
-const REGION     = "US"; // change to your country code if you like (see /regions) 
+const REGION     = "AU"; // change to your country code if you like (see /regions) 
 
 /* ========= DOM ========= */
 const form     = document.getElementById("searchForm");
@@ -277,3 +277,4 @@ window.addEventListener("keydown", (e)=> { if (e.key === "Escape") closeModal();
 /* ========= Init ========= */
 setChipActive("all");
 setStatus("Search for a movie or TV show…");
+
